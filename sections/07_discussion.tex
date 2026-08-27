@@ -1,0 +1,21 @@
+\section{Discussion}
+
+\subsection{Implications for ADS Testing}
+
+The results suggest that safety-critical test generation benefits from separating two decisions: where search should begin and how a selected interaction should be amplified. Threat-guided screening concentrates the search on interactions that already exhibit limited safety margins, while the downstream optimizer explores feasible changes to the POV behaviour. This decomposition makes seed quality an explicit, testable component of the generation pipeline.
+
+The strongest failures occur in lateral and non-signalized-junction conflicts. These interactions require prediction across multiple motion axes and often affect both immediate collision avoidance and longer-horizon route recovery. They therefore provide useful targets for system-level debugging spanning perception, prediction, planning, and control rather than a single component.
+
+\subsection{Open-Loop Search and Closed-Loop Validity}
+
+Using recorded ego trajectories avoids repeated simulator calls and enables broad exploration, but it approximates the ego vehicle's reaction to a perturbed POV. The final scenarios must therefore be replayed in closed loop, and the manuscript should explicitly report how well open-loop risk rankings predict closed-loop outcomes. Precision at the emergency threshold, rank correlation, top-$k$ retention, and simulator-call reduction would characterize this trade-off more directly.
+
+\subsection{Threats to Validity}
+
+\textbf{Construct validity.} Threat metrics are proxies for safety risk and may not fully capture perception errors, traffic-rule violations, passenger comfort, or responsibility for a collision. Reporting each metric and concrete outcome separately reduces, but does not eliminate, this limitation.
+
+\textbf{Internal validity.} The current seed pool is obtained with Apollo, which may bias the selected interactions toward Apollo-specific behaviour. Simulator nondeterminism and scenario-replay variance may also affect outcomes. Repeated executions and a seed-selection comparison using matched interactions are needed for the final study.
+
+\textbf{External validity.} The evaluation uses SCTrans, CARLA, Apollo, and TM. Results may not generalize to other datasets, simulators, maps, weather conditions, or production ADS. Replication on another corpus and ADS would strengthen the claim.
+
+\textbf{Conclusion validity.} The existing results are descriptive. The final manuscript should use fixed search budgets, multiple random seeds, paired analyses where applicable, effect sizes, and confidence intervals.

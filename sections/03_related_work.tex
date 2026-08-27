@@ -1,0 +1,9 @@
+\section{Related Work}
+
+A growing body of work targets safety-critical scenarios through adversarial methods, broadly spanning three categories. Across all categories, however, existing approaches share key limitations: scenarios are short in duration (typically $\leq5$ seconds), narrow in scope (e.g., simple junctions or single-lane interactions), and weakly grounded in realistic, complex vehicle behaviours that lead to real-world collisions.
+
+Reinforcement learning approaches train adversarial agents to challenge the ego vehicle (e.g., Learning-to-Collide~\cite{ding_learning_2020}, D2RL~\cite{feng_dense_2023}, CRASH~\cite{kulkarni_crash_2024}, AuthSim~\cite{yang_authsim_2025}). While effective at inducing failures, they are typically confined to narrow scenario classes, require significant training cost, and often produce behaviours that lack realism or kinematic interpretability, limiting alignment with established crash typologies.
+
+Trajectory perturbation approaches directly modify actor trajectories (e.g., AdvSim~\cite{wang_advsim_2023}, STRIVE~\cite{rempe_generating_2022}, DiffScene~\cite{xu_diffscene_2025}, CausalAF~\cite{ding_causalaf_2023}, game-theoretic methods~\cite{lin_scenario-based_2025}). Although they enable diverse scenario generation, they are generally restricted to simplified environments or pairwise interactions and do not provide systematic coverage of pre-crash scenarios.
+
+LLM and foundation model approaches (e.g., ChatScene~\cite{zhang_chatscene_2024}, ScenGE~\cite{liu_adversarial_2025}, retrieval-augmented methods~\cite{mei_seeking_2025} , SafeBench~\cite{xu_safebench_2022}) improve diversity and plausibility through knowledge grounding. However, they still inherit limitations in scenario duration, interaction complexity, and systematic coverage of real-world pre-crash typologies.

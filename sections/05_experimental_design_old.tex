@@ -1,0 +1,30 @@
+\section{Experimental Design}
+\label{sec:experimental_design}
+
+We evaluate the generated scenarios with the two ADS introduced in Sec.~\ref{sec:platform_ads}: Apollo, representing a full-stack learning-enabled system, and CARLA Traffic Manager (TM), representing a rule-based controller. Both systems execute the same generated scenario definitions in CARLA.
+
+\subsection{Baseline Execution and Seed Pool}
+
+We execute 854 original, unperturbed SCTrans scenarios with Apollo as the ego vehicle and continuously monitor the kinematic interactions described in Sec.~\ref{sec:threshold_selection}. Of these, 562 scenarios (65.8\%) trigger at least one metric at the critical level. Because a scenario may contain several distinct ego--POV interactions, we decompose the executions into events and classify them against the ten target typologies. This process yields 731 threat-triggering events as the seed pool.
+
+\subsection{Generated Scenario Set}
+
+For each typology, the evolutionary search collects 100 candidates that cross at least one emergency threshold. The clustering and sparsity-weighted selection stage retains 30 representatives per typology, producing 300 scenarios in total. Each selected scenario is executed with both ADS. We record the minimum or maximum relevant threat metric, collision outcome, and whether the ego vehicle reaches its destination.
+
+\subsection{Research Questions}
+
+\begin{description}
+  \item[RQ1:] To what extent does adversarial amplification increase threat severity, and how does the change vary across typologies?
+  \item[RQ2:] How frequently do the generated scenarios cause collisions or mission-level failures, and which typologies are most failure-prone?
+  \item[RQ3:] Under equivalent generated scenarios, how do Apollo and TM differ in robustness across longitudinal, junction, and lateral conflicts?
+\end{description}
+
+\subsection{Measures and Analysis}
+
+For RQ1, lower TTC, THW, and LTTC values indicate greater risk, whereas higher BTN and STN values indicate greater risk. We compare each generated scenario with its originating near-miss seed and summarize results by typology. For RQ2 and RQ3, we report collision and destination-failure counts separately as well as their combined failure rate. Before submission, the final manuscript should add confidence intervals, effect sizes, repeated-run stability, and the exact simulator and hardware configurations.
+
+% FSE revision checklist:
+% 1. Add a typology-matched random-seed + EA baseline.
+% 2. Add random-search or mutation-fuzzing under an equal evaluation budget.
+% 3. Validate open-loop rankings with closed-loop execution and report precision.
+% 4. Compare diversity selection with top-risk and random selection.

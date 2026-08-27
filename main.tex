@@ -1,0 +1,53 @@
+\documentclass[sigconf,review,anonymous]{acmart}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{Bib\TeX}}%
+}
+
+% Review-mode metadata. Replace these fields when the FSE call for papers
+% publishes the exact venue metadata for your submission cycle.
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\acmConference[FSE 'XX]
+  {ACM International Conference on the Foundations of Software Engineering}
+  {Month DD--DD, 20XX}
+  {City, Country}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+\usepackage{microtype}
+
+\title{Risk-Guided Scenario Amplification for Automated Driving System Testing}
+
+\author{Anonymous Author(s)}
+\affiliation{%
+  \institution{Anonymous Institution}
+  \country{Anonymous}
+}
+
+\begin{document}
+
+\begin{abstract}
+Scenario-based testing is essential for evaluating autonomous driving systems (ADS), but safety-critical test generation must search a large space in which useful starting points are rare. We present a risk-guided scenario amplification framework that screens executed traffic scenarios with interaction-specific threat metrics, extracts near-miss events as optimization seeds, and perturbs the principal other vehicle within a temporally scoped window. An evolutionary search evaluates candidates against recorded ego-vehicle trajectories, avoiding repeated simulator calls during optimization, before diversity-aware selection constructs the final test suite. The current study screens 854 successfully executed SCTrans scenarios, identifies 562 threat-triggering scenarios and 731 risky interaction events, and generates 300 adversarial scenarios across ten NHTSA-derived pre-crash typologies. Closed-loop evaluation with Apollo and CARLA Traffic Manager exposes substantially different failure profiles, with lateral and non-signalized-junction conflicts producing the most severe outcomes. The results motivate risk-informed initialization as a practical direction for scalable ADS test generation.
+\end{abstract}
+
+\keywords{autonomous driving systems, scenario-based testing, risk-guided testing, evolutionary search, safety-critical systems}
+
+\maketitle
+
+\input{sections/01_introduction}
+\input{sections/02_background}
+\input{sections/03_related_work}
+\input{sections/04_approach}
+\input{sections/05_experimental_design}
+\input{sections/06_results}
+\input{sections/07_discussion}
+\input{sections/08_conclusion}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}

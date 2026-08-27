@@ -1,0 +1,19 @@
+\section{Introduction}
+
+Autonomous driving systems (ADS), such as Apollo and Autoware, are software-intensive cyber-physical systems that integrate perception, prediction, planning, and control. Meaningful safety assurance therefore requires more than nominal-road testing: an ADS must also be exercised under rare interactions that stress assumptions shared across these software components.
+
+Scenario-based simulation offers a reproducible way to conduct such testing, yet its effectiveness depends on which scenarios enter the generation process. Naturalistic datasets contain many realistic executions but comparatively few safety-critical interactions. Conversely, search-based generators can explore large parameter spaces, but their effectiveness and cost depend strongly on the quality of the initial seeds. Existing work has largely emphasized how to mutate or optimize a scenario; the question of which executed interactions provide promising optimization starting points remains less developed.
+
+We investigate risk-guided scenario amplification. Starting from SCTrans scenarios~\cite{dai_sctrans_2024}, we execute each baseline with Apollo and monitor threat metrics selected according to the dominant interaction kinematics. These metrics identify near-miss ego--vehicle events and the time windows in which risk emerges. We then parameterize the principal other vehicle (POV) and use evolutionary search to amplify each interaction toward a more critical state. Candidate evaluation is performed against the recorded ego trajectory within the scoped window, which avoids a simulator call for every search iteration; selected candidates are subsequently evaluated in closed-loop simulation.
+
+The study covers ten two-vehicle pre-crash typologies derived from the NHTSA classification~\cite{noauthor_pre-crash_nodate}. From 854 successfully executed baseline scenarios, the screening stage identifies 562 scenarios containing 731 threat-triggering events. The generation stage produces 100 candidates per typology and retains 30 diverse representatives, yielding 300 adversarial scenarios. We evaluate the resulting tests on Apollo and CARLA Traffic Manager and report changes in threat severity, collisions, and mission-level failures.
+
+This paper makes the following contributions:
+
+\begin{enumerate}
+  \item \textbf{Risk-guided seed identification.} We use interaction-aware threat metrics to identify optimization-effective near-miss events from an executed scenario corpus.
+  \item \textbf{Temporally scoped scenario amplification.} We parameterize POV behaviour only around the observed threat window and apply open-loop evolutionary optimization to reduce simulator cost.
+  \item \textbf{A multi-typology empirical study.} We evaluate 300 generated scenarios spanning longitudinal, junction, and lateral conflicts on two ADS with different architectures.
+\end{enumerate}
+
+The remainder of the paper introduces the scenario and safety foundations, positions the work against related generation techniques, describes the approach, and reports the experimental results and their implications.

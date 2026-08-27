@@ -1,0 +1,75 @@
+\section{Experimental Design}
+\label{sec:experimental_design}
+
+The revised evaluation does not primarily test the broad claim that an evolutionary algorithm can generate dangerous scenarios. Instead, it separates four questions concerning the effectiveness of risk-guided seed selection, the choice of search strategy, the transferability of the seed-selection benefit, and the comparison with gradient-based scenario generation.
+
+\subsection{Research Questions}
+\label{sec:research_questions}
+%%%
+\iffalse
+RQ1: Comparison of our proposed method versus existing mutation-based fuzz SOTA: EA risky (E0) versus Fuzz-Random (E3)
+RQ2: Comparison of our proposed method versus existing closed lopp optimization: EA risky (E0) versus King -Random (K0) 
+RQ3: Performance of our approach for risky versus random seed selection : E0 versus E1
+RQ4: Improvement of SOTA when using risky instead of random seed selection: King-Random (k0) versus King-Risky (K1) + Fuzz-Random (E3) versus Fuzz-Risky (E2)
+\fi
+%%%%
+
+\begin{description}
+    \item[RQ1:] \textbf{Does threat-guided seed selection improve evolutionary scenario generation?}
+    We compare risk-triggering seeds with structurally matched ordinary interactions while keeping the evolutionary algorithm, scenario parameterization, threat objective, and search budget unchanged. This comparison isolates the contribution of seed selection (E0 vs.~E1).
+
+    \item[RQ2:] \textbf{Does the benefit of threat-guided seed selection transfer to other search strategies?}
+    We evaluate whether risky seeds also improve mutation-based fuzzing (E2 vs.~E3) and KING-native gradient-based search (K1 vs.~K0). Consistent improvements across these comparisons would suggest that the value of threat-guided seeds is not specific to a single optimizer.
+
+    \item[RQ3:] \textbf{Does evolutionary search outperform mutation-based fuzzing under controlled conditions?}
+    We compare EA and mutation-based fuzzing using identical seeds, parameter spaces, threat objectives, validity constraints, and evaluation budgets. The primary comparison uses risky seeds (E0 vs.~E2), while the comparison using random-matched seeds (E1 vs.~E3) provides supporting evidence.
+
+    \item[RQ4:] \textbf{How does risk-guided open-loop EA compare with KING-native closed-loop optimization?}
+    We compare the proposed primary configuration with KING using common closed-loop outcomes, including critical-scenario yield, collision discovery, scenario validity, diversity, simulator calls, and wall-clock cost (E0 vs.~K1, with K0 as a contextual baseline). Because the two approaches use different objectives, search spaces, and execution loops, this is an end-to-end pipeline comparison rather than a controlled comparison between EA and gradient descent.
+\end{description}
+
+\subsection{Experimental Configurations}
+\label{sec:experimental_configurations}
+
+Table~\ref{tab:experimental_configurations} summarizes the six configurations used to answer the research questions. E0 is the primary method. E0--E3 form a controlled $2\times2$ comparison of seed selection and search strategy, while K0 and K1 evaluate the effect of seed selection within KING-native optimization.
+
+\begin{table*}[t]
+    \centering
+    \small
+    \caption{Experimental configurations. ``Loop'' describes the search phase; candidates produced by open-loop search are subsequently evaluated through a common closed-loop validation protocol.}
+    \label{tab:experimental_configurations}
+    \begin{tabularx}{\textwidth}{@{}lllllX@{}}
+        \toprule
+        \textbf{ID} & \textbf{Seed} & \textbf{Search} & \textbf{Loop} & \textbf{Objective} & \textbf{Purpose} \\
+        \midrule
+        E0 & Risky & EA & Open & Threat metrics & Primary method \\
+        E1 & Random-matched & EA & Open & Threat metrics & Seed-selection ablation \\
+        E2 & Risky & Fuzzing & Open & Threat metrics & EA ablation \\
+        E3 & Random-matched & Fuzzing & Open & Threat metrics & Seed--search interaction \\
+        K0 & Random-matched & KING-Native & Closed & Collision & KING seed baseline \\
+        K1 & Risky & KING-Native & Closed & Collision & Risky-seed effect on KING \\
+        \bottomrule
+    \end{tabularx}
+\end{table*}
+
+\subsection{Comparison Protocol}
+\label{sec:comparison_protocol}
+
+The comparisons follow five controls. First, risky and random-matched seeds are paired within the same NHTSA typology and are matched on structural properties such as road geometry, parameterizable POV behaviour, ego speed, relative distance, and interaction duration. Random-matched seeds are ordinary interactions that do not trigger the critical threat threshold. Second, E0--E3 use the same scenario representation, perturbation bounds, temporal window, threat objective, validity checks, and evaluation budget. Third, the fuzzing configurations use mutation and feedback-based corpus retention but omit population-based selection, crossover, and evolutionary reproduction. Fourth, K0 and K1 use the same KING-native action space, collision objective, closed-loop execution, and computational budget; only seed selection differs. Finally, all stochastic configurations are repeated using the same set of random seeds.
+
+For E0--E3, open-loop search is followed by a common validation procedure. Each method searches under a fixed objective-evaluation budget, after which valid candidates crossing an emergency threshold are processed using the same diversity-selection procedure. The selected candidates are then replayed in closed-loop simulation with the target ADS. Consequently, ``open loop'' refers only to candidate search and does not imply that final outcomes are evaluated without ADS feedback.
+
+\subsection{Hypotheses and Interpretation}
+\label{sec:hypotheses}
+
+The evaluation tests the following directional hypotheses:
+
+\begin{itemize}
+    \item \textbf{H1:} E0 outperforms E1, supporting threat-guided seed selection for EA.
+    \item \textbf{H2:} E2 outperforms E3 and K1 outperforms K0, indicating that risky seeds also benefit fuzzing and KING-native search.
+    \item \textbf{H3:} E0 outperforms E2 under the same risky seeds and budget, supporting EA over mutation-based fuzzing.
+\end{itemize}
+
+RQ4 is primarily comparative rather than directional. We expect E0 to require fewer simulator calls during search, whereas KING may benefit from direct closed-loop feedback and a collision-specific objective. We therefore report both effectiveness and computational cost rather than interpreting a single outcome as evidence of optimizer superiority.
+
+The primary outcome is the number of closed-loop-confirmed critical scenarios generated under a fixed budget. Secondary outcomes include open-loop emergency-candidate yield, closed-loop confirmation rate, collision rate, risk improvement over the seed, time to first successful candidate, simulator calls, wall-clock time, scenario validity, and feature-space diversity.

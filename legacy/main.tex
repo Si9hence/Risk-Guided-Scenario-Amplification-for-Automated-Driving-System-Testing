@@ -1,0 +1,277 @@
+%%
+%% This is file `sample-sigconf.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% samples.dtx  (with options: `all,proceedings,bibtex,sigconf')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample-sigconf.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%%
+%% Commands for TeXCount
+%TC:macro \cite [option:text,text]
+%TC:macro \citep [option:text,text]
+%TC:macro \citet [option:text,text]
+%TC:envir table 0 1
+%TC:envir table* 0 1
+%TC:envir tabular [ignore] word
+%TC:envir displaymath 0 word
+%TC:envir math 0 word
+%TC:envir comment 0 0
+%%
+%% The first command in your LaTeX source must be the \documentclass
+%% command.
+%%
+%% For submission and review of your manuscript please change the
+%% command to \documentclass[manuscript, screen, review]{acmart}.
+%%
+%% When submitting camera ready or to TAPS, please change the command
+%% to \documentclass[sigconf]{acmart} or whichever template is required
+%% for your publication.
+%%
+%%
+% \documentclass[sigconf]{acmart}
+\documentclass[sigconf,review,anonymous]{acmart}
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+\setcopyright{acmlicensed}
+\copyrightyear{2026}
+\acmYear{2026}
+\acmDOI{XXXXXXX.XXXXXXX}
+%% These commands are for a PROCEEDINGS abstract or paper.
+\acmConference[ASE '26]{41st IEEE/ACM International Conference on Automated Software Engineering}{2026}{Munich, DE}
+%%
+%%  Uncomment \acmBooktitle if the title of the proceedings is different
+%%  from ``Proceedings of ...''!
+%%
+%%\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
+%%  June 03--05, 2018, Woodstock, NY}
+\acmISBN{978-1-4503-XXXX-X/2018/06}
+
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% For managing citations, it is recommended to use bibliography
+%% files in BibTeX format.
+%%
+%% You can then either use BibTeX with the ACM-Reference-Format style,
+%% or BibLaTeX with the acmnumeric or acmauthoryear sytles, that include
+%% support for advanced citation of software artefact from the
+%% biblatex-software package, also separately available on CTAN.
+%%
+%% Look at the sample-*-biblatex.tex files for templates showcasing
+%% the biblatex styles.
+%%
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%% Uncommenting
+%% the next command will enable that style.
+%%\citestyle{acmauthoryear}
+\usepackage{geometry}
+\usepackage{booktabs} % Required for \toprule, \midrule, \bottomrule
+\usepackage{tabularx} % Required for automatic line wrapping in columns
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+% \renewcommand{\baselinestretch}{0.95}
+% \setlength{\textfloatsep}{5pt}
+% \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
+
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{Adversarial External Vehicle Scenario Generation for Testing Autonomous Driving System}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+\iffalse
+\author{Author}
+\email{aa@aa.com}
+\orcid{1234-5678-9012}
+\author{aa}
+\email{aa@aa.com}
+\affiliation{%
+  \institution{aa}
+  \city{aa}
+  \state{aa}
+  \country{aa}
+}
+\fi
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+% \renewcommand{\shortauthors}{Trovato et al.}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+
+\begin{abstract}
+Autonomous Driving Systems (ADS) are routinely evaluated against nominal traffic conditions, yet real-world collisions are disproportionately caused by unpredictable and adversarial third-party behaviour — a dimension that existing scenario datasets and benchmarks largely neglect. In this paper, we present a systematic framework for adversarial scenario generation targeting principal other vehicle (POV) behaviour, grounded in the pre-crash vehicle interaction typology documented by the National Highway Traffic Safety Administration (NHTSA). We propose a novel evolutionary algorithm that generates adversarial scenarios from existing baseline trajectories through targeted perturbation, without requiring repeated simulation calls during optimisation — operating instead over a scoped time window within the recorded baseline trajectory to efficiently evolve behaviour toward a specified risk profile. We additionally introduce the first adversarial scenario generation pipeline for roundabout environments, an entirely neglected setting in existing work, encompassing automated map acquisition, roundabout geometry identification, and injection of diverse adversarial behaviours tailored to roundabout dynamics. Across ten adversarial behaviour categories and thirty scenarios per category, we evaluate two ADS — Apollo and CARLA's Traffic Manager — in the CARLA simulator, measuring threat frequency across three safety-critical metrics, collision rates, and mission-level failures. Adversarial scenarios trigger substantially more threats, collisions, and destination failures than baseline conditions in both systems. Lateral adversarial behaviours — unsignalled lane changes, same-direction turning vehicles, and vehicle drift — emerge as the most severe threat drivers, while stopped-vehicle behaviour proves uniquely disruptive in roundabout settings, entrapping the ego vehicle without a viable re-routing path. These findings expose concrete, reproducible failure modes in current ADS and establish an empirical foundation for more rigorous safety certification and informed public deployment of autonomous vehicles.
+\end{abstract}
+
+% \received{20 February 2007}
+% \received[revised]{12 March 2009}
+% \received[accepted]{5 June 2009}
+
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+\maketitle
+
+
+
+\section{Introduction}
+
+Autonomous Driving Systems (ADS), such as Apollo and Autoware, are complex cyber-physical platforms that integrate perception, planning, and control to navigate dynamic environments safely. Achieving meaningful safety assurance demands rigorous testing across not only routine driving conditions, but also the full breadth of challenging and unpredictable scenarios that characterise real-world roads.
+
+A critical yet underexplored dimension of ADS testing is the behaviour of external agents. Existing scenario datasets and benchmarks overwhelmingly focus on nominal traffic conditions, evaluating system performance against well-behaved participants who conform to expected traffic norms. Yet real-world driving is anything but orderly: human drivers execute erratic lane changes, brake without warning, and fail to yield; pedestrians jaywalk, behave inconsistently at crossings, or step into the roadway unexpectedly. These behaviours, although not necessarily malicious, are nonetheless disruptive and violate the assumptions under which such systems are designed and tested. The absence of adversarial agents from scenario testing datasets therefore represents a fundamental gap in ADS validation.
+
+This gap has tangible consequences. Edge cases involving aggressive or unexpected agent behaviour are precisely the conditions most likely to expose weaknesses in perception pipelines, prediction modules, and planning algorithms. It is also worth noting that these are not just theoretical concerns: incident analyses from agencies such as the National Highway Traffic Safety Administration (NHTSA)~\cite{noauthor_pre-crash_nodate} consistently implicate unpredictable third-party behaviour as a primary contributing factor in vehicle collisions, directly underscoring the real-world relevance of adversarial testing. However,  existing work in adversarial scenario generation remains narrow in scope — typically restricted to single-vehicle interactions in simplified settings such as single-lane following, running for under five seconds, and failing to capture the diversity and complexity of driving errors documented in real incident reports.
+
+In this paper, we address this gap at scale. We generate adversarial scenarios involving ten distinct categories of POV behaviour, directly motivated by and mapped to the top ten pre-crash vehicle interaction patterns identified by the NHTSA. Adversarial scenarios are generated from existing baseline scenarios in an established dataset~\cite{dai_sctrans_2024} through targeted perturbation of POV parameters, evolving trajectories toward a specified risk behaviour. Crucially, our optimisation algorithm does not require repeated simulation runs during evolution; instead, it operates over a scoped time window within the recorded baseline trajectory, identifying the segment most likely to trigger threats and optimising within that window by comparison against the baseline ego vehicle kinematics. This makes the generation process substantially more efficient than simulation-in-the-loop approaches. In parallel, we develop a dedicated pipeline for adversarial scenario generation in roundabout environments, an entirely neglected setting in existing work, which involves automated map acquisition, geometry identification, and the injection of diverse adversarial behaviours tailored to roundabout dynamics.
+
+We evaluate all generated scenarios in the CARLA simulator across two ADS: Apollo and CARLA's Traffic Manager. Adversarial scenarios in both regular and roundabout settings trigger significantly more threats, collisions, and mission failures than their baseline counterparts across both systems. Lateral adversarial behaviours, namely unsignalled lane changes, same-direction turning vehicles, and vehicle drift, emerge as the most potent threat drivers, inducing the most severe threat events and the highest collision rates in both ADS. In roundabout environments, lateral behaviour similarly elevates threat severity, while stopped-vehicle behaviour proves uniquely disruptive, causing the ego vehicle to become entrapped with no viable rerouting path. These findings highlight concrete, reproducible failure modes in current ADS, with direct implications for safety certification and public deployment readiness.
+
+In summary, the key contributions of this paper are:
+
+\begin{enumerate}
+    \item A novel evolutionary algorithm for adversarial scenario generation involving POV, grounded in the pre-crash interaction typology documented by traffic safety agencies including NHTSA, and operating without repeated simulation calls during optimisation.
+    \item The first adversarial scenario generation pipeline targeting roundabout environments, supporting automated map acquisition, geometry identification, and behaviour-specific adversary injection — a setting unsupported by any existing technique or dataset.
+    \item A systematic empirical evaluation of two ADS — Apollo and CARLA's Traffic Manager — across the full suite of generated adversarial scenarios, measuring threat frequency, collision rates, and successfully reaching the destination.
+\end{enumerate}
+\iffalse
+Autonomous Driving Systems (ADS), such as Apollo and Autoware, are complex cyber-physical platforms that fuse perception, planning, and control to ensure safe vehicle operation in dynamic environments. Achieving high safety assurance demands rigorous testing across diverse and challenging driving conditions.
+A critical yet underexplored dimension of ADS testing concerns the presence of adversarial behaviour from external agents -- other vehicles and pedestrians. Existing scenario testing datasets and benchmarks predominantly focus on nominal traffic conditions, evaluating system performance against well-behaved participants whose actions conform to expected traffic norms. However, real-world driving environments are inherently unpredictable: human drivers exhibit erratic lane changes, sudden braking, and failure to yield; pedestrians jaywalk, behave inconsistently at crossings, or enter the roadway unexpectedly. These behaviours, while not necessarily malicious in intent, constitute adversarial conditions from the perspective of the ADS, as they violate the assumptions under which the system was designed and tested.
+
+The absence of such adversarial scenarios from scenario testing datasets represents a significant gap in ADS testing. Edge cases involving aggressive or unexpected agent behaviour are precisely the conditions most likely to expose weaknesses in perception pipelines, prediction modules, and planning algorithms. Crucially, these are not purely theoretical concerns: incident reports and accident analyses, eg. from the National Highway Traffic Safety Administration (NHTSA) in the US~\cite{noauthor_pre-crash_nodate},  consistently implicate unpredictable third-party behaviour as a key contributing factor in vehicle collisions, underscoring the real-world relevance of adversarial agent testing. Existing work on adversarial testing is very limited in scope focussing on a single vehicle interaction or setting, eg. single lane following, that is too simplified, runnign for less than 5 seconds and does not capture the diversity and complexity of real world driving errors seen in incident reports. 
+
+In this paper, we generate scenarios with ten different types of adversarial POV behaviour motivated by and capturing the top ten pre-crash vehicle interactions analysed by NHTSA. The adversarial scenarios are generated from existing scenarios, found in established scenario datasets, through perturbation of POV parameters and evolution towards the risky typology. Our optimisation algorithm does not require repeated runs within the simulation environment for evolution and instead restricts perturbations to a scoped time window in the recorded baseline trajectory that triggers threats and optimizing in that window by comparing to the baseline ego vehicle kinematic data.  Independently, we also generate adversarial scenarios targeting roundabouts that involves identifying roundabout maps, interpreting their geometry and introducing different types of risky POV behaviour.   
+For each of the adversarial behavior types, we generate 30 different scenarios in the regular and roundabout setting. We evaluate the generated adversarial scenarios in the CARLA simulator with two different ADS: Apollo and Traffic Manager. 
+
+Adversarial scenarios, in both the regular and roundabout setting, triggered significantly more threats, collisions and undesirable behaviour (destination not reached) in both Apollo and Traffic Manager. Lateral adversarial typologies, namely, changing lanes, vehicles turning in the same direction and drifting vehicles trigger more severe threats and collisions in both ADS indicating sensitivity and lack of robustness to this type of behaviour. In the roundabout setting, lateral adversarial behaviour is still seen to increase the severity of threats. We also notice that the ADS is more sensitive to vehicle stopped behaviour causing it to be entrapped in the roundabout with no straightforward re-routing. 
+The ability to evaluate the ADS with adversarial scenarios that emulate pre-crash vehicle interactions is crucial for achieving robust safety certification and building the empirical evidence base needed to justify public deployment of autonomous vehicles.
+
+In summary, we make the following in this paper:
+\begin{enumerate}
+    \item Novel evolutionary algorithm to generate adversarial behaviours involving POV that closely follows the pre-crash vehicle interaction recorded by traffic and safety administration like the NHTSA. 
+    \item We support adversarial scenario generation for the rounadabout setting, which is not supported by any other technique or dataset. 
+    \item We evaluate Apollo and Carla's Traffic Manager over the generated adversarial scenarios measuring threats, collisions and undesirable behaviour. 
+\end{enumerate}
+\fi
+%The evolutionary algorithm is simulation free, optimising baseline trajectories towards pre-crash vehicle interactions. 
+
+\input{background}
+% \section{Related Work}
+% - Scenario-based Testing of ADS
+% -- all of the existing work on scenario generation and evaluation focuses on ADS behavour in the presence of "normal" behaviour of external agents. None of the existing work manipulates the external agents to behave in an adversarial fashion
+
+% - Adversarial behaviour of external agents
+% --isolated junction work 
+
+% - Does not include any contribution with respect to round about specific behaviour
+
+\input{approach}
+
+% \input{experiments}
+\section{Experiment}
+
+We evaluate the generated adversarial scenarios using the two ADS described in Sec.~\ref{sec:platform_ads}: Apollo (machine-learning-based) and CARLA Traffic Manager (rule-based), enabling a direct comparison of architectural robustness under identical adversarial conditions.
+
+\subsection{Baseline Simulation and Seed Identification.}
+We execute 854 original, unperturbed SCTrans scenarios in CARLA with Apollo as the ego vehicle, continuously monitoring kinematic interactions using the threat metrics defined in Sec.~\ref{sec:threshold_selection}. Of these, \textbf{562 (65.8\%) triggered at least one threat metric} at the critical threshold level, classifying them as candidate seed scenarios.
+
+Notably, many scenarios contain \textit{multiple} near-miss events --- a single run may involve the ego vehicle interacting with several surrounding vehicles at different points, each triggering metrics independently. After decomposing these into individual events and classifying each against our ten target typologies (Sec.~\ref{sec:typology_selection}), we obtain \textbf{731 triggered events} constituting the seed pool for adversarial generation.
+
+\subsection{Generated Scenario Dataset.}
+For each adversarial typology, the EA results in 100 candidate scenarios surpassing at least one emergency threshold. Feature-space clustering with sparsity-weighted sampling distils each pool into 30 diverse scenarios, producing a final dataset of \textbf{300 adversarial scenarios} (30 $\times$ 10 types). We report collisions, destination failures, and threat metric values for both ADS.
+
+\subsection{Research Questions}
+For the different types of adversarial POV scenarios introduced by our approach, we assess the following research questions in our evaluation. The first three research question are for the regular setting and the last research question is for the roundabout setting. A robust ADS is expected to navigate adversarial traffic conditions safely, maintaining appropriate responses to threatening stimuli while avoiding collisions and minimising exposure to safety-critical events. Despite this expectation, a systematic evaluation of ADS threat sensitivity across a diverse range of adversarial typologies has not been established in the literature. The research questions address that gap by comparing threat and collision frequency against a controlled set of adversarial scenarios, enabling a fine-grained analysis of which typologies most significantly degrade ADS safety performance.
+\begin{description}
+\item[RQ1:] Does the introduction of adversarial behaviour in non-roundabout scenarios lead to an increase in the frequency of safety-critical threats experienced by the ADS, and how does this vary across individual typologies?
+%A robust ADS is expected to be able to deal with adversarial scenarios in a safe fashion, avoiding collision and threats. However, this has not been evaluated systematically. %We run 800 regular scenarios from ScTrans and compare them with 1000 adversaial scenarios representing different types of dangerous behaviours for number of collisions and threats. 
+\item[RQ2:]Does adversarial behaviour in non-roundabout scenarios lead to an increase in collisions and mission-level failures — specifically, failure to reach the intended destination — and to what extent does sensitivity vary across typologies?
+%RQ2: Do the adversarial non-roundabout behaviours increase the number of collisions and undesirable outcomes (fail to reach destination) in the ADS?
+
+%We introduce 10 different types of dangerous behaviours from [?]. ADS might be robust to some types of behaviours more than others. This evaluation gives us an insight into which type of adversarial behaviour the ADS is most sensitive to. 
+
+\item[RQ3:] When subjected to equivalent adversarial conditions, which ADS — Apollo or TM — demonstrates greater overall robustness, and in which adversarial behaviour categories do differences in number of collisions and destination not reaching most prominently emerge?
+\item[RQ4:] How does the introduction of adversarial behaviour in roundabout environments affect the frequency of collisions and safety-critical threats experienced by the ADS, and how does this relationship vary across roundabout configurations of differing structural complexity?
+To assess robustness in this context, we consider twelve distinct roundabout maps varying in structural complexity — defined in terms of the number of lanes and the number of entry and exit points — in order to evaluate whether ADS performance under adversarial conditions is sensitive. %not only to the nature of the adversarial behaviour itself, but also to the complexity of the environment in which it occurs.
+\end{description}
+%RQ4: How does adversarial roundabout behaviour affect ADS collisions and threats?
+%We consider 12 different roundabout maps with different complexities in terms of number of lanes and entry/exits. 
+
+%- 300 scenarios as baseline
+%10 Adversarial behaviour types - abrupt stopping, tailgating (reduce distance to leading vehicle), cutting in front with lane change, speeding beyond speed limit (30\% and 60\%), increasing traffic density in roundabouts, dangerous driving that ignores ego vehicle
+
+\input{results}
+
+\input{relatedwork}
+\section{Conclusion}
+This paper presents an adversarial scenario generation approach that manipulates the trajectories of external vehicles, grounded in pre-crash interaction typologies documented by NHTSA. We further introduce the first adversarial scenario generation pipeline specifically targeting roundabout environments.
+Evaluation across 300 adversarial scenarios for both regular and roundabout settings demonstrates a substantial increase in triggered threats, collisions, and failure-to-reach-destination events for Apollo and TM, compared to baseline scenarios assuming well-behaved external vehicles.
+These results expose concrete and reproducible failure modes in current autonomous driving systems, underscoring critical challenges for safety certification and raising important considerations for their readiness for public deployment.
+\section{Dataset Availability}
+The source code for the approach and the generated adversarial scenarios are available at
+\url{https://anonymous.4open.science/r/AVESGen-22D6/}
+
+\noindent To preserve public disclosure of code and artifacts during review phase and protecting ourselves from reuse of our code before our work is published, we provide a private anonymous link rather than a public DOI-backed repository. Upon acceptance, the artifact will be made publicly available with a DOI.
+
+% \section{Dataset Availability}
+% The source code for the approach and the generated adversarial scenarios are available at \\
+% \hyperlink{github link}{https://anonymous.4open.science/r/AVESGen-22D6/}
+\newpage
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}
+\endinput
+%%
+%% End of file `sample-sigconf.tex'.

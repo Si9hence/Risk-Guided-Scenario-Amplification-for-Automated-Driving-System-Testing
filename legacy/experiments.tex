@@ -1,0 +1,57 @@
+\section{Experiment}
+\subsection{ADS}
+\paragraph{apollo} machine learning based
+\paragraph{traffic manager} rule based
+
+
+% \subsection{Threat Metric Threshold Selection}
+% \label{sec:threshold_selection}
+ 
+% To establish quantitative boundary conditions for the evaluation of autonomous driving systems across the ten target scenarios, we define five threat metrics, each with a two-tier threshold structure distinguishing \textit{critical} (anticipatory response required) and \textit{emergency} (immediate intervention required) states. The threshold values, summarised in Table~\ref{tab:thresholds}, are derived from the Euro~NCAP Assisted Driving Highway \& Interurban Test and Assessment Protocol v2.2~\cite{euroncap2024ad}, the prevailing European consumer safety assessment framework for Level~2 driving automation systems.
+ 
+% \begin{table*}[htbp]
+% \centering
+% \caption{Threat metric thresholds for autonomous driving scenario evaluation. Source column indicates whether the value is directly mapped~(D) from an explicit protocol parameter or derived~(d) from protocol test configurations.}
+% \label{tab:thresholds}
+% \renewcommand{\arraystretch}{1.3}
+% \begin{tabular}{@{}llcclcl@{}}
+% \toprule
+% \textbf{Metric} & \textbf{Level} & \textbf{Value} & \textbf{Source} & \textbf{Derivation basis} & \textbf{Scenarios} \\
+% \midrule
+% \multirow{2}{*}{TTC [s]}
+%   & Critical  & 3.0  & D & ACC abort criterion (\S3.3.1.1)          & \multirow{2}{*}{1--3} \\
+%   & Emergency & 1.5  & D & FCW issuance threshold (\S4.3.1)         & \\
+% \midrule
+% \multirow{2}{*}{THW [s]}
+%   & Critical  & 2.0  & d & ISO~15622 upper bound   & \multirow{2}{*}{1--3} \\
+%   & Emergency & 1.0  & d & Production ACC minimum gap (\S3.3.1.1)   & \\
+% \midrule
+% \multirow{2}{*}{BTN [--]}
+%   & Critical  & 0.52 & d & CCRs (\S3.3.1) & \multirow{2}{*}{4--7} \\
+%   & Emergency & 0.80 & d & ACC-to-AEB transition regime (\S4.3.1)   & \\
+% \midrule
+% \multirow{2}{*}{LTTC [s]}
+%   & Critical  & 1.5  & D & Cut-in TTC (\S3.3.1.3)   & \multirow{2}{*}{8--10} \\
+%   & Emergency & 0.5  & D & C2MC cut-in TTC (\S3.3.2.5) & \\
+% \midrule
+% \multirow{2}{*}{STN [--]}
+%   & Critical  & 0.40 & d & Lane Support System (\S4.3.5) & \multirow{2}{*}{8--10} \\
+%   & Emergency & 0.64 & d & S-Bend  (\S3.4.1) & \\
+% \bottomrule
+% \end{tabular}
+% \end{table*}
+ 
+% The metrics are grouped by the dominant threat axis of each scenario family. For \textit{longitudinal rear-end conflicts} (Scenarios: lead vehicle stopped, decelerating, or travelling at lower speed), the combined use of time-to-collision (TTC), time headway (THW), and brake threat number (BTN) captures both the temporal urgency and the required deceleration demand. For \textit{intersection and crossing conflicts}, TTC and BTN are retained, as these scenarios involve approach-phase braking toward a road feature or conflict point without a sustained car-following phase, rendering THW inapplicable. For \textit{lateral conflicts in the same travel direction} (lane change, turning, drifting), the lateral time-to-collision (LTTC) and steering threat number (STN) characterise the lateral encroachment rate and the steering demand relative to the vehicle's lateral acceleration capacity.
+ 
+% Of the ten threshold values, four are \textit{directly mapped} from explicitly stated protocol parameters. The TTC critical threshold of 3.0\,s corresponds to the test abort criterion specified in \S3.3.1.1 of~\cite{euroncap2024ad}, whereby a trial is terminated if the ACC system has not initiated braking by this point. The TTC emergency threshold of 1.5\,s is the forward collision warning (FCW) issuance deadline in \S4.3.1, below which partial credit is awarded only if a warning has been provided. The LTTC thresholds of 1.5\,s and 0.5\,s correspond directly to the prescribed TTC values at lane-change completion for the car-to-car cut-in test at 120\,km/h (\S3.3.1.3) and the car-to-motorcyclist cut-in test at 50\,km/h (\S3.3.2.5), respectively.
+ 
+% The remaining six thresholds are \textit{derived} from the protocol's test configurations through established physical relationships. The THW values of 2.0\,s (critical) and 1.0\,s (emergency) are inferred from the protocol's requirement to test at the ``closest following distance'' (\S3.3.1.1), interpreted against ISO~15622~\cite{iso15622} minimum time-gap recommendations and observed production ACC calibrations. The BTN critical value of 0.52 is computed from the most demanding ACC scenario---CCRs at 130\,km/h ($v_\mathrm{rel} = 36.1$\,m/s) with system activation at 250\,m and the protocol's ACC deceleration limit of 5\,m/s\textsuperscript{2}: $\mathrm{BTN} = v_\mathrm{rel}^2 / (2 \cdot d \cdot a_\mathrm{max}) = 36.1^2 / (2 \times 250 \times 5) = 0.52$. The BTN emergency value of 0.80 marks the transition into the AEB operating regime, where deceleration demands exceed the ACC comfort boundary. The STN critical value of 0.40 is mapped from the protocol's LKA departure threshold (\S4.3.5), which awards points only when lane departure is limited to 0.4\,m. The STN emergency value of 0.64 is derived from the lateral acceleration demand of the S-Bend second turn ($R = 374$\,m) at 100\,km/h: $\mathrm{STN} = a_\mathrm{lat,req} / a_\mathrm{lat,max} = (27.8^2 / 374) / 3.2 = 0.64$, where 3.2\,m/s\textsuperscript{2} represents the nominal comfort-limited lateral acceleration on dry pavement. The full derivation of each threshold, including intermediate calculations and protocol cross-references, is provided in Appendix~\ref{app:threshold_derivation}.
+
+
+\subsection{Datasets}
+\paragraph{SCTrans}
+\begin{itemize}
+    \item original dataset
+    \item 854 success simulation
+    \item seed scenarios with threat metric triggered
+\end{itemize}
